@@ -60,12 +60,12 @@ class GeneticAlgorithm:
                         parent_two = SELECTOR.tournament_selection(population, 6)
                         child = RECOMBINER.blending(parent_one, parent_two)
                 elif rand <= 0.9:
-                    variation_flage = "2 points crossover"
-                    child = RECOMBINER._2_points(parent_one, parent_two, 0.5)
+                    variation_flage = "1 point crossover"
+                    child = RECOMBINER._1_point(parent_one, parent_two, 0.5)
                     while child == None:
                         parent_one = SELECTOR.tournament_selection(population, 6)
                         parent_two = SELECTOR.tournament_selection(population, 6)
-                        child = RECOMBINER._2_points(parent_one, parent_two, 0.5)
+                        child = RECOMBINER._1_point(parent_one, parent_two, 0.5)
                 else:
                     variation_flage = "add polygons mutation"
                     child = MUTATOR.add_polygons(parent_one)
@@ -74,12 +74,12 @@ class GeneticAlgorithm:
                         child = MUTATOR.add_polygons(parent_one)
                 new_popularion.append(child)
             population = new_popularion
-            if i % 100 == 0 or i == epochs - 1:
+            if i % verpose == 0 or i == epochs - 1:
                 population.sort(key=lambda ind: ind.fitness)
                 fittest = population[0]
             if verpose:
                 if i % verpose_alpha == 0 or i == epochs - 1:
-                    print(f"\033[33mMost fit individual in epoch {i} : {best_estimate} with variation {variation_flage}")
+                    print(f"\033[32mMost fit individual in epoch {i} : {best_estimate} with variation {variation_flage}")
         population.sort(key=lambda ind: ind.fitness)
         fittest = population[0]
         return fittest

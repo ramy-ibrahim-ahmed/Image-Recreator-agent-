@@ -25,7 +25,7 @@ class Recombination:
                 return None
         return child
 
-    def _2_points(self, ind1, ind2, horizontal_prob, elitism=True):
+    def _1_point(self, ind1, ind2, horizontal_prob, elitism=True):
         prop = random.random()
         if prop <= horizontal_prob:
             split_point = random.randint(1, self.height)
